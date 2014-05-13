@@ -1,7 +1,20 @@
-require 'packrattle'
-require 'parsimmon'
+pr = require 'packrattle'
+# require 'parsimmon'
+
+addition = pr.seq \
+  ->{expr}
+  '+'
+  ->{expr}
+
+global.expr = pr.alt(
+  # pr.seq ->{expr}, '+', ->{expr}
+  pr.seq \
+    ->{expr}
+    '+'
+    ->{expr}
+  '+'
+  )
 
 
-
-Parsor =
+GLOBAL.Parsor =
   peg: 'hi'
