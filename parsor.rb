@@ -1,14 +1,14 @@
 require 'pry'
 
 class Parsor
-  def self.get *a, &b; parse(*a, &b).join end
+  def self.get input, &b; parse(input.split(''), &b).join end
 
   def self.parse input, &rules
     new(input).match(&rules)
   end
 
   def initialize input
-    @input = input.split('')
+    @input = input
     @result = []
     @ended = false
   end
@@ -38,7 +38,7 @@ class Parsor
   def many &rules
     return if @ended
 
-    while( (sub_result = self.class.parse(@input.join, &rules)) != [] )
+    while( (sub_result = self.class.parse(@input, &rules)) != [] )
       @input.shift sub_result.size
       @result << sub_result
     end
@@ -47,9 +47,13 @@ class Parsor
   def any_of &rules
     return if @ended
 
-    while( (sub_result = self.class.parse(@input.join, &rules)) != [] )
+    while( (sub_result = self.class.parse(@input, &rules)) != [] )
       @input.shift sub_result.size
       @result << sub_result
     end
   end
+end
+
+class Alternater < Parsor
+
 end

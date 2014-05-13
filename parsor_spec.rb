@@ -3,42 +3,42 @@ require_relative 'parsor'
 describe Parsor do
 
   describe 'chars' do
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         char 'o'
       end.should == ''
-    end
+    }
 
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         char 'H'
       end.should == 'H'
-    end
+    }
 
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         char 'H'
         char 'o'
       end.should == ''
-    end
+    }
   end
 
   describe 'strings' do
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         string 'Hello'
       end.should == 'Hello'
-    end
+    }
 
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         string 'Hel o'
       end.should == ''
-    end
+    }
   end
 
   describe 'combinators' do
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         char 'H'
         char 'e'
@@ -47,9 +47,9 @@ describe Parsor do
         end
         char 'o'
       end.should == 'Hello'
-    end
+    }
 
-    example do
+    example {
       Parsor.get("Hello world oh world...") do
         char 'H'
         char 'e'
@@ -58,6 +58,6 @@ describe Parsor do
           char 'l'
         end
       end.should == 'Hello'
-    end
+    }
   end
 end
